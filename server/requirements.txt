@@ -1,0 +1,17 @@
+# DeskBot brain server  (Python 3.10 - 3.12)
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-dotenv>=1.0
+numpy>=1.26
+opencv-python>=4.9,<5      # 5.x removed the Haar face detector used here
+onnxruntime>=1.18          # face-emotion model (FER+)
+faster-whisper>=1.0        # speech-to-text, runs locally on CPU
+edge-tts>=6.1              # text-to-speech (online voices, English + Bangla)
+pyttsx3>=2.90              # offline English voice (Windows built-in)
+miniaudio>=1.59            # MP3 -> 16 kHz PCM, no ffmpeg needed
+google-genai>=1.0          # Gemini for conversation (free API key)
+anthropic>=0.70            # Claude, optional alternative
+
+# Phone detection (YOLOv8n, ~6 MB model auto-downloaded on first run).
+# Pulls in PyTorch (large). Remove this line to run without phone detection.
+ultralytics>=8.2

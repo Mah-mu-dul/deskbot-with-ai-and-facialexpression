@@ -1,0 +1,21 @@
+# firmware
+firmware/.pio/
+firmware/.vscode/
+firmware/include/secrets.h
+
+# server
+server/.env
+server/.venv/
+server/data/
+server/models/
+server/*.pt
+__pycache__/
+*.pyc
+
+# standalone build
+dist/
+server/build/
+server/.venv-build/
+
+# handover package
+DeskBot-handover.zip

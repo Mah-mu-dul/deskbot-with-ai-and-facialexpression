@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "deskbot-server",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", ".venv\\Scripts\\python.exe", "app.py"],
+      "cwd": "server",
+      "port": 8000
+    }
+  ]
+}

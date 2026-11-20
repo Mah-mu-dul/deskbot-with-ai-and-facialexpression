@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>DeskBot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css?v=10">
+</head>
+<body>
+<!-- Icon set (line icons, 24px grid) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 10.5 12 3.5l8.5 7"/><path d="M5.5 9v11.5h13V9"/><path d="M10 20.5v-5h4v5"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20.5 11.5a8.5 8.5 0 0 1-12.3 7.6L3.5 20.5l1.4-4.4A8.5 8.5 0 1 1 20.5 11.5z"/></symbol>
+    <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 10v3.5l2.5 2"/><path d="M9.5 2.5h5"/><path d="M18.5 6.5l1.2-1.2"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24"><rect x="3.5" y="7" width="17" height="12.5" rx="4.5"/><path d="M12 3.5V7"/><path d="M9 12.2v1.6M15 12.2v1.6"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 12h3M11 12h9M4 17h11M19 17h1"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="17" r="2"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M20.5 3.5 10 14"/><path d="M20.5 3.5 14 20.5l-4-6.5-6.5-4z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2.5"/></symbol>
+    <symbol id="i-thermo" viewBox="0 0 24 24"><path d="M14 14.5V5.5a2 2 0 0 0-4 0v9a4 4 0 1 0 4 0z"/><path d="M12 11v5"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3.5s6 6.4 6 10.8a6 6 0 0 1-12 0C6 9.9 12 3.5 12 3.5z"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 9.5v5h3.5l4.5 4V5.5l-4.5 4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
+    <symbol id="i-wave" viewBox="0 0 24 24"><path d="M3 12h2.5l2-4.5 3 9 3-12 3 10 2-2.5H21"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6.5 16v-4.5a5.5 5.5 0 0 1 11 0V16l1.5 2h-14z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+    <symbol id="i-screen" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12.5" rx="2.5"/><path d="M8.5 20.5h7M12 17v3.5"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15.5" r="3.8"/><path d="M10.8 12.8 19.5 4M16.5 7l2.5 2.5M14.5 9l1.8 1.8"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.6 3.5 5.4 3.5 8.5s-1 5.9-3.5 8.5c-2.5-2.6-3.5-5.4-3.5-8.5s1-5.9 3.5-8.5z"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l1.8-2.5h6.4L17 8h3v11H4z"/><circle cx="12" cy="13.2" r="3.3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3.5v4M12 16.5v4M3.5 12h4M16.5 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M3 9a13 13 0 0 1 18 0"/><path d="M6 12.5a8.5 8.5 0 0 1 12 0"/><path d="M9 16a4 4 0 0 1 6 0"/><circle cx="12" cy="19.2" r=".9"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20.5h16"/><path d="M7 17v-5M12 17V7M17 17v-8"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m14.5 6-6 6 6 6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.5A7.5 7.5 0 1 1 9.5 4.5a6 6 0 0 0 10 10z"/></symbol>
+  </defs>
+</svg>
+
+<div class="app">
+  <header class="top">
+    <div class="who">
+      <span class="who-mark" aria-hidden="true"><i></i><i></i></span>
+      <div>
+        <div class="who-name" id="botName">Desky</div>
+        <div class="who-status" id="botStatus">Connecting</div>
+        <div class="who-status ai" id="aiStatus"></div>
+      </div>
+    </div>
+    <div class="seg lang" role="group" aria-label="Language">
+      <button data-lang="en" class="on">EN</button>
+      <button data-lang="bn">বাংলা</button>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="home" class="on"><svg class="ic"><use href="#i-home"/></svg><span data-i18n="tabHome">Home</span></button>
+    <button role="tab" data-tab="chat"><svg class="ic"><use href="#i-chat"/></svg><span data-i18n="tabChat">Chat</span></button>
+    <button role="tab" data-tab="focus"><svg class="ic"><use href="#i-timer"/></svg><span data-i18n="tabFocus">Focus</span></button>
+    <button role="tab" data-tab="reports"><svg class="ic"><use href="#i-chart"/></svg><span data-i18n="tabReports">Reports</span></button>
+    <button role="tab" data-tab="bot"><svg class="ic"><use href="#i-bot"/></svg><span data-i18n="tabBot">Bot</span></button>
+    <button role="tab" data-tab="settings"><svg class="ic"><use href="#i-sliders"/></svg><span data-i18n="tabSettings">Settings</span></button>
+  </nav>
+
+  <main>
+    <!-- HOME ----------------------------------------------------------- -->
+    <section class="panel on" id="tab-home">
+      <div class="screen" id="screen">
+        <div class="eyes" id="eyes" data-face="neutral"><span class="eye l"></span><span class="eye r"></span></div>
+        <p class="screen-line" id="moodLine">…</p>
+      </div>
+
+      <div class="home-grid">
+        <figure class="cam">
+          <img id="cam" alt="">
+          <figcaption id="camNote"><svg class="ic sm"><use href="#i-camera"/></svg><span data-i18n="camWait">Waiting for camera</span></figcaption>
+          <span class="phone-flag hidden" id="phoneFlag"><svg class="ic sm"><use href="#i-phone"/></svg><span data-i18n="phoneSeen">Phone spotted</span></span>
+        </figure>
+
+        <div class="climate">
+          <div class="reading">
+            <svg class="ic"><use href="#i-thermo"/></svg>
+            <div><b id="temp">--</b><span>°C</span><small data-i18n="temp">Temperature</small></div>
+          </div>
+          <div class="reading">
+            <svg class="ic"><use href="#i-drop"/></svg>
+            <div><b id="hum">--</b><span>%</span><small data-i18n="hum">Humidity</small></div>
+          </div>
+          <svg id="spark" viewBox="0 0 300 64" preserveAspectRatio="none" aria-label="Room chart"></svg>
+          <small class="muted" data-i18n="room2h">Room over the last 2 hours</small>
+        </div>
+      </div>
+
+      <div class="today">
+        <div><b id="tSessions">0</b><small data-i18n="sessions">Focus sessions</small></div>
+        <div><b id="tMinutes">0</b><small data-i18n="minutes">Minutes focused</small></div>
+        <div><b id="tPhone">0</b><small data-i18n="phoneWarn">Phone warnings</small></div>
+      </div>
+    </section>
+
+    <!-- CHAT ----------------------------------------------------------- -->
+    <section class="panel" id="tab-chat">
+      <div class="chat-wrap">
+        <div class="chat" id="chat" aria-live="polite"></div>
+        <form id="chatForm" class="composer">
+          <input id="chatInput" autocomplete="off" data-i18n-ph="chatPh" placeholder="Message Desky">
+          <button class="icon-btn primary" type="submit" aria-label="Send"><svg class="ic"><use href="#i-send"/></svg></button>
+        </form>
+        <label class="switch-row">
+          <span class="switch"><input type="checkbox" id="speak" checked><i></i></span>
+          <svg class="ic sm"><use href="#i-volume"/></svg><span data-i18n="speakAloud">Read replies out loud on the bot</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- FOCUS ---------------------------------------------------------- -->
+    <section class="panel" id="tab-focus">
+      <div class="focus">
+        <div class="ring">
+          <svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="52"/><circle class="fill" id="ringFill" cx="60" cy="60" r="52"/></svg>
+          <div class="ring-text"><b id="timer">25:00</b><span id="phase">Ready</span></div>
+        </div>
+        <div class="focus-actions">
+          <button class="round primary big" id="btnToggle" onclick="focusToggle()" aria-label="Start"><svg class="ic"><use href="#i-play"/></svg></button>
+          <button class="round" id="btnStop" onclick="focusCmd('stop')" aria-label="Stop"><svg class="ic"><use href="#i-stop"/></svg></button>
+        </div>
+        <div class="steppers">
+          <label><span data-i18n="work">Focus</span><input type="number" id="workMin" min="1" max="180" value="25"><em data-i18n="min">min</em></label>
+          <label><span data-i18n="break">Break</span><input type="number" id="breakMin" min="1" max="60" value="5"><em data-i18n="min">min</em></label>
+        </div>
+      </div>
+      <div class="today">
+        <div><b id="fSessions">0</b><small data-i18n="sessions">Focus sessions</small></div>
+        <div><b id="fMinutes">0</b><small data-i18n="minutes">Minutes focused</small></div>
+        <div><b id="fPhone">0</b><small data-i18n="phoneWarn">Phone warnings</small></div>
+      </div>
+    </section>
+
+    <!-- REPORTS ------------------------------------------------------- -->
+    <section class="panel" id="tab-reports">
+      <div class="rep-head">
+        <div class="seg" id="repRange">
+          <button data-range="day" class="on" data-i18n="rDay">Day</button>
+          <button data-range="week" data-i18n="rWeek">Week</button>
+        </div>
+        <div class="rep-nav">
+          <button class="icon-btn sm" id="repPrev" aria-label="Earlier"><svg class="ic sm"><use href="#i-left"/></svg></button>
+          <span id="repLabel">-</span>
+          <button class="icon-btn sm" id="repNext" aria-label="Later"><svg class="ic sm"><use href="#i-right"/></svg></button>
+        </div>
+      </div>
+
+      <div class="rep-tiles">
+        <div><b id="rFocus">-</b><small data-i18n="rFocusTime">Focus time</small></div>
+        <div><b id="rSessions">-</b><small data-i18n="sessions">Focus sessions</small></div>
+        <div><b id="rPhone">-</b><small data-i18n="phoneWarn">Phone warnings</small></div>
+        <div><b id="rDone">-</b><small data-i18n="rCompleted">Completed</small></div>
+      </div>
+      <p class="rep-note" id="rNote"></p>
+
+      <div class="block">
+        <h2 id="rChartTitle">-</h2>
+        <svg class="rep-chart" id="rChart" viewBox="0 0 700 180" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div class="rep-axis" id="rAxis"></div>
+      </div>
+
+      <div class="block">
+        <h2 data-i18n="rMood">Mood while focusing</h2>
+        <div class="mood-bar" id="rMoodBar"></div>
+        <div class="mood-legend" id="rMoodLegend"></div>
+      </div>
+
+      <div class="block">
+        <h2 data-i18n="rSessionsTitle">Sessions</h2>
+        <ul class="rep-list" id="rList"></ul>
+      </div>
+    </section>
+
+    <!-- BOT ------------------------------------------------------------ -->
+    <section class="panel" id="tab-bot">
+      <div class="block">
+        <h2 data-i18n="expressions">Expressions</h2>
+        <div class="faces" id="faces"></div>
+      </div>
+
+      <div class="block">
+        <h2 data-i18n="sound">Sound</h2>
+        <label class="switch-row">
+          <span class="switch"><input type="checkbox" id="moodSounds"><i></i></span>
+          <svg class="ic sm"><use href="#i-wave"/></svg><span data-i18n="moodSounds">Mood sounds when the face changes</span>
+        </label>
+        <div class="vol"><svg class="ic sm"><use href="#i-volume"/></svg><input type="range" id="volume" min="0" max="100" aria-label="Volume"><output id="volVal">--</output></div>
+        <div class="chips">
+          <button onclick="post('/api/beep',{pattern:'beep'})"><svg class="ic sm"><use href="#i-bell"/></svg><span data-i18n="beep">Beep</span></button>
+          <button onclick="post('/api/beep',{pattern:'success'})"><svg class="ic sm"><use href="#i-spark"/></svg><span data-i18n="tune">Tune</span></button>
+          <button onclick="post('/api/beep',{pattern:'warning'})"><svg class="ic sm"><use href="#i-bell"/></svg><span data-i18n="alarm">Alarm</span></button>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2 data-i18n="screen">Screen</h2>
+        <div class="seg wide" id="screenSeg">
+          <button data-mode="face"><svg class="ic sm"><use href="#i-bot"/></svg><span data-i18n="showFace">Face</span></button>
+          <button data-mode="sensors"><svg class="ic sm"><use href="#i-thermo"/></svg><span data-i18n="showRoom">Room</span></button>
+          <button data-mode="info"><svg class="ic sm"><use href="#i-wifi"/></svg><span data-i18n="showInfo">Info</span></button>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2 data-i18n="sayExact">Say something through the bot</h2>
+        <form id="sayForm" class="composer">
+          <input id="sayInput" autocomplete="off" data-i18n-ph="sayPh" placeholder="Type the exact words">
+          <button class="icon-btn" type="submit" aria-label="Say"><svg class="ic"><use href="#i-volume"/></svg></button>
+        </form>
+      </div>
+
+      <div class="block">
+        <h2 data-i18n="activity">Recent activity</h2>
+        <ul class="feed" id="feed"></ul>
+      </div>
+    </section>
+
+    <!-- SETTINGS ------------------------------------------------------- -->
+    <section class="panel" id="tab-settings">
+      <div class="block conn">
+        <h2><svg class="ic sm"><use href="#i-wifi"/></svg><span data-i18n="cTitle">Bot connection</span></h2>
+        <dl class="conn-info">
+          <div><dt data-i18n="cBot">Bot</dt><dd><a id="cBotIp" target="_blank" rel="noopener">-</a></dd></div>
+          <div><dt data-i18n="cWifi">Wi-Fi</dt><dd id="cWifi">-</dd></div>
+          <div><dt data-i18n="cServer">Server</dt><dd id="cServer">-</dd></div>
+        </dl>
+
+        <label class="field"><span data-i18n="cMove">Move the bot to another server</span>
+          <div class="composer">
+            <input id="cNewServer" autocomplete="off" inputmode="url" placeholder="192.168.0.120">
+            <button class="icon-btn" type="button" id="cMoveBtn" aria-label="Send"><svg class="ic"><use href="#i-send"/></svg></button>
+          </div></label>
+        <p class="hint" data-i18n="cMoveHint">Use the address shown in the other PC's DeskBot window.</p>
+
+        <div class="conn-wifi">
+          <div>
+            <b data-i18n="cWifiTitle">Change Wi-Fi</b>
+            <p class="hint" data-i18n="cWifiHint">The bot restarts as DeskBot-Setup.</p>
+          </div>
+          <button type="button" class="chip-btn" id="cWifiBtn"><svg class="ic sm"><use href="#i-wifi"/></svg><span data-i18n="cWifiBtn">Open Wi-Fi setup</span></button>
+        </div>
+        <p class="muted small" id="cStatus" role="status"></p>
+      </div>
+
+      <form id="settingsForm" class="settings">
+        <div class="block">
+          <h2><svg class="ic sm"><use href="#i-key"/></svg><span data-i18n="sBrain">AI brain</span></h2>
+          <div class="seg wide" id="providerSeg">
+            <button type="button" data-provider="gemini">Gemini</button>
+            <button type="button" data-provider="claude">Claude</button>
+          </div>
+          <input type="hidden" name="ai_provider">
+          <div class="prov" data-for="gemini">
+            <label class="field"><span data-i18n="sGeminiKey">Gemini API key</span>
+              <input name="gemini_api_key" type="password" autocomplete="off" data-key-field></label>
+            <p class="hint"><span data-i18n="sGeminiHint">Free key from</span> <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a></p>
+            <label class="field"><span data-i18n="sModel">Model</span><input name="gemini_model"></label>
+          </div>
+          <div class="ai-test">
+            <span class="ai-state" id="aiState">-</span>
+            <button type="button" class="chip-btn" id="aiTestBtn"><svg class="ic sm"><use href="#i-spark"/></svg><span data-i18n="aiTest">Test connection</span></button>
+          </div>
+          <div class="prov" data-for="claude">
+            <label class="field"><span data-i18n="sClaudeKey">Claude API key</span>
+              <input name="claude_api_key" type="password" autocomplete="off" data-key-field></label>
+          </div>
+        </div>
+
+        <div class="block">
+          <h2><svg class="ic sm"><use href="#i-globe"/></svg><span data-i18n="sVoice">Language and voice</span></h2>
+          <div class="fields">
+            <label class="field"><span data-i18n="sName">Bot name</span><input name="bot_name"></label>
+            <label class="field"><span data-i18n="sLang">Bot speaks</span>
+              <select name="language">
+                <option value="auto" data-i18n="langAuto">Whatever I use</option>
+                <option value="en">English</option>
+                <option value="bn">বাংলা</option>
+              </select></label>
+            <label class="field wide"><span data-i18n="sPersona">Personality</span><input name="persona"></label>
+          </div>
+        </div>
+
+        <div class="block">
+          <h2><svg class="ic sm"><use href="#i-bot"/></svg><span data-i18n="sBehave">Behaviour</span></h2>
+          <label class="switch-row"><span class="switch"><input type="checkbox" name="hands_free"><i></i></span><span data-i18n="sHandsFree">Hands-free: always listening, answers when called by name</span></label>
+          <label class="field"><span data-i18n="sWakePhrase">Wake phrase</span><input name="wake_phrase" id="wakePhraseInput" placeholder="Hey Oly"></label>
+          <label class="field"><span data-i18n="sWake">Extra wake words, comma separated (the bot's name always works)</span><input name="wake_words" placeholder="অলি, robot"></label>
+          <label class="switch-row"><span class="switch"><input type="checkbox" name="mood_sounds"><i></i></span><span data-i18n="moodSounds">Mood sounds when the face changes</span></label>
+          <label class="switch-row"><span class="switch"><input type="checkbox" name="emotion_talk"><i></i></span><span data-i18n="sMood">Talk about my mood</span></label>
+          <label class="switch-row"><span class="switch"><input type="checkbox" name="phone_warning"><i></i></span><span data-i18n="sPhone">Warn me about my phone while focusing</span></label>
+          <label class="switch-row"><span class="switch"><input type="checkbox" name="away_warning"><i></i></span><span data-i18n="sAway">Remind me if I leave the desk</span></label>
+          <label class="switch-row"><span class="switch"><input type="checkbox" name="climate_tips"><i></i></span><span data-i18n="sClimate">Tips about the room</span></label>
+          <label class="switch-row"><span class="switch"><input type="checkbox" name="greet_on_return"><i></i></span><span data-i18n="sGreet">Welcome me back</span></label>
+          <details>
+            <summary data-i18n="advanced">Fine tuning</summary>
+            <div class="fields">
+              <label class="field"><span data-i18n="sMoodCd">Seconds between mood comments</span><input type="number" name="emotion_cooldown_s"></label>
+              <label class="field"><span data-i18n="sPhoneCd">Seconds between phone warnings</span><input type="number" name="phone_cooldown_s"></label>
+              <label class="field"><span data-i18n="sPhoneHits">Frames with a phone, out of 5</span><input type="number" name="phone_min_hits" min="1" max="5"></label>
+              <label class="field"><span data-i18n="sPhoneConf">Phone confidence, 0 to 1</span><input type="number" step="0.05" name="phone_confidence"></label>
+              <label class="field"><span data-i18n="sAwayS">Away after, seconds</span><input type="number" name="away_after_s"></label>
+              <label class="field"><span data-i18n="sWork">Default focus, minutes</span><input type="number" name="work_min"></label>
+              <label class="field"><span data-i18n="sBreak">Default break, minutes</span><input type="number" name="break_min"></label>
+            </div>
+          </details>
+        </div>
+
+        <div class="save-bar">
+          <button class="save-btn" type="submit"><svg class="ic sm"><use href="#i-check"/></svg><span data-i18n="save">Save settings</span></button>
+          <span id="saved" class="muted" role="status"></span>
+        </div>
+      </form>
+    </section>
+  </main>
+</div>
+
+<script src="/static/app.js?v=12"></script>
+</body>
+</html>
